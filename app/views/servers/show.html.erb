@@ -1,0 +1,124 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @server.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @server.description %>
+</p>
+
+<p>
+  <b>generation:</b>
+  <%= @server.generation %>
+</p>
+
+<p>
+  <b>region:</b>
+  <%= @server.region %>
+</p>
+
+<p>
+  <b>Schedule:</b>
+  <!-- <%= @server.schedule %> -->
+</p>
+
+	<table border="1" >
+		<th></th>
+		<% @hour = [] %>
+		<% (0..23).each{|num| @hour << num.to_s } %>
+		<% @hour.each do |hour| %>
+			<th><%="#{hour}"%></th>
+		<% end %>
+		</tr>
+	<tr>
+		<td>日</td>
+		<% (0..23).each do |num| %>
+			<% if @server.schedule[num,1] == "1" then %>
+				<td class="op" style="background-color:#ffdddd;"></td>
+			<% elsif @server.schedule[num,1] == "2" then %>
+				<td class="op" style="background-color:#ffff00;"></td>
+			<% else %>
+				<td class="op"></td>
+			<% end %>
+		<% end %>
+	</tr>
+	<tr>
+		<td>月</td>
+		<% (24..47).each do |num| %>
+			<% if @server.schedule[num,1] == "1" then %>
+				<td class="op" style="background-color:#ffdddd;"></td>
+			<% elsif @server.schedule[num,1] == "2" then %>
+				<td class="op" style="background-color:#ffff00;"></td>
+			<% else %>
+				<td class="op"></td>
+			<% end %>
+		<% end %>
+	</tr>
+	<tr>
+		<td>火</td>
+		<% (48..71).each do |num| %>
+			<% if @server.schedule[num,1] == "1" then %>
+				<td class="op" style="background-color:#ffdddd;"></td>
+			<% elsif @server.schedule[num,1] == "2" then %>
+				<td class="op" style="background-color:#ffff00;"></td>
+			<% else %>
+				<td class="op"></td>
+			<% end %>
+		<% end %>
+	</tr>
+	<tr>
+		<td>水</td>
+		<% (72..95).each do |num| %>
+			<% if @server.schedule[num,1] == "1" then %>
+				<td class="op" style="background-color:#ffdddd;"></td>
+			<% elsif @server.schedule[num,1] == "2" then %>
+				<td class="op" style="background-color:#ffff00;"></td>
+			<% else %>
+				<td class="op"></td>
+			<% end %>
+		<% end %>
+	</tr>
+	<tr>
+		<td>木</td>
+		<% (96..119).each do |num| %>
+			<% if @server.schedule[num,1] == "1" then %>
+				<td class="op" style="background-color:#ffdddd;"></td>
+			<% elsif @server.schedule[num,1] == "2" then %>
+				<td class="op" style="background-color:#ffff00;"></td>
+			<% else %>
+				<td class="op"></td>
+			<% end %>
+		<% end %>
+	</tr>
+	<tr>
+		<td>金</td>
+		<% (120..143).each do |num| %>
+			<% if @server.schedule[num,1] == "1" then %>
+				<td class="op" style="background-color:#ffdddd;"></td>
+			<% elsif @server.schedule[num,1] == "2" then %>
+				<td class="op" style="background-color:#ffff00;"></td>
+			<% else %>
+				<td class="op"></td>
+			<% end %>
+		<% end %>
+	</tr>
+	<tr>
+		<td>土</td>
+		<% (144..167).each do |num| %>
+			<% if @server.schedule[num,1] == "1" then %>
+				<td class="op" style="background-color:#ffdddd;"></td>
+			<% elsif @server.schedule[num,1] == "2" then %>
+				<td class="op" style="background-color:#ffff00;"></td>
+			<% else %>
+				<td class="op"></td>
+			<% end %>
+		<% end %>
+	</tr>
+	</table>
+
+<%= link_to 'Edit', edit_server_path(@server) %> |
+<%= link_to 'Back', servers_path %>
+<HR/>

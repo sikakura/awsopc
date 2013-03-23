@@ -1,0 +1,28 @@
+<% if user_signed_in? %>
+ <%= link_to "ログアウト", destroy_user_session_path, :method => 'delete' %>
+ <%= link_to "ユーザ情報の編集", edit_user_registration_path %>
+<% else %>
+ <%= link_to "ログイン", new_user_session_path %>
+ <%= link_to "登録", new_user_registration_path %>
+<% end %>
+
+<center>
+<BR/>
+<BR/>
+<BR/>
+<BR/>
+<H1>Amazon Web Services Operation Center</H1>
+<BR/>
+<BR/>
+<BR/>
+<quote>
+This site helps you to operation your virtural machine on Amazon Web Service(AWS).<br/>
+Please sign up and regist your machine, so you will be able to start/stop machine automatically.<br/>
+</quote>
+</center>
+<BR/>
+<BR/>
+<BR/>
+<BR/>
+<BR/>
+<BR/>

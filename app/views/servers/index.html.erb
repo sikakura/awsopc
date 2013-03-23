@@ -1,0 +1,31 @@
+<h1>登録済サーバ一覧</h1>
+
+<table>
+  <tr>
+    <th><%=t 'activerecord.attributes.servers.name' %></th>
+    <th><%=t 'activerecord.attributes.servers.description' %></th>
+<!--    <th>Schedule</th> -->
+    <th><%=t 'activerecord.attributes.servers.generation' %></th>
+    <th><%=t 'activerecord.attributes.servers.region' %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @servers.each do |server| %>
+  <tr>
+    <td><%= server.name %></td>
+    <td><%= server.description %></td>
+    <td><%= server.generation %></td>
+    <td><%= server.region %></td>
+    <!--<td><%= server.schedule %></td>-->
+    <td><%= link_to 'Show', server %></td>
+    <td><%= link_to 'Edit', edit_server_path(server) %></td>
+    <td><%= link_to 'Destroy', server, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Server', new_server_path %>

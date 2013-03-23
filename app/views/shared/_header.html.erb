@@ -1,0 +1,11 @@
+<div id="header">
+  <% if user_signed_in? %>
+    <%= link_to "Return MENU", menus_index_path %>
+    <div align="right">
+    LOGIN ID:<%= current_user.email %>
+    </div>
+    <div align="right">
+     <%= link_to "Logout", destroy_user_session_path, :method => 'delete' %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,20 @@
+<h1>Top Menu</h1>
+
+<CENTER>
+<H1>
+ <%= link_to "管理情報の登録・変更", auths_path %>
+</H1>
+<BR/>
+<BR/>
+<H1>
+ <% if @unregistered %>
+   上のリンクの「管理情報の登録・登録」を先に行なって下さい。<BR/>
+ <% else %>
+   <%= link_to "機器情報の登録・変更", servers_path %>
+ <% end %>
+</H1>
+<BR/>
+<BR/>
+<BR/>
+</CENTER>
+<BR/>

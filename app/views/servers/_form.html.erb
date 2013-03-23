@@ -1,0 +1,103 @@
+<%= javascript_include_tag "application" %>
+<%= form_for(@server) do |f| %>
+  <% if @server.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@server.errors.count, "error") %> prohibited this server from being saved:</h2>
+
+      <ul>
+      <% @server.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :generation %><br />
+    <%= f.text_field :generation, :size => '2', :maxlength => '2' %>
+  </div>
+  <div class="field">
+    <%= f.label :region %><br />
+    <%= f.select :region, [['North Virginia', 'ec2.us-east-1.amazonaws.com'], ['Oregon', 'ec2.us-west-2.amazonaws.com'],['California', 'ec2.us-west-1.amazonaws.com'],['Ireland', 'ec2.eu-west-1.amazonaws.com'],['Singapore', 'ec2.ap-southeast-1.amazonaws.com'],['Sydney', 'ec2.ap-southeast-2.amazonaws.com'],['Tokyo', 'ec2.ap-northeast-1.amazonaws.com'],['Sao Paulo', 'ec2.sa-east-1.amazonaws.com']], :selected => 'ec2.ap-northeast-1.amazonaws.com' %>
+  </div>
+  <div class="field">
+    <%= f.label :schedule %><br />
+    <%= f.hidden_field :schedule %>
+  </div>
+	
+	<input type="radio" name="mode" value="1" style="background:#ffdddd;" onclick="modechange();" checked/>起動
+	<input type="radio" name="mode" value="0" onclick="modechange();" />停止
+	<input type="radio" name="mode" value="2" onclick="modechange();" />バックアップ
+	<div id="sample-color" style="text-align:center; width:40px; background:#ffdddd;">凡例</div>
+	<table id="time_table" class="op" border="1" onmousedown="mouseDown(this, event); return false;" onmouseup="mouseUp(this, event);" onmousemove="mouseMove(this, event); return false;">
+		<th></th>
+		<% @hour = [] %>
+		<% (0..23).each{|num| @hour << num.to_s } %>
+		<% @hour.each do |hour| %>
+			<th><%="#{hour}"%></th>
+		<% end %>
+		</tr>
+	<tr>
+		<td>日</td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+	</tr>
+	<tr>
+		<td>月</td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+	</tr>
+	<tr>
+		<td>火</td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+	</tr>
+	<tr>
+		<td>水</td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+	</tr>
+	<tr>
+		<td>木</td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+	</tr>
+	<tr>
+		<td>金</td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+	</tr>
+	<tr>
+		<td>土</td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+		<td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td><td class="op"></td>
+	</tr>
+	</table>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

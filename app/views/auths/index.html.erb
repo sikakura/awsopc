@@ -1,0 +1,28 @@
+<h1>登録済管理者情報</h1>
+
+<table>
+  <tr>
+    <th><%=t 'activerecord.attributes.auths.email' %></th>
+    <th><%=t 'activerecord.attributes.auths.access_key' %></th>
+    <th><%=t 'activerecord.attributes.auths.secret_key' %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @auths.each do |auth| %>
+  <tr>
+    <td><%= auth.email %></td>
+    <td><%= auth.access_key %></td>
+<!--    <td><%= auth.secret_key %></td> -->
+    <td> ********** </td>
+    <td><%= link_to 'Show', auth %></td>
+    <td><%= link_to 'Edit', edit_auth_path(auth) %></td>
+    <td><%= link_to 'Destroy', auth, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Auth', new_auth_path %>
