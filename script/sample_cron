@@ -1,0 +1,1 @@
+5 * * * * /bin/bash -l -c 'cd /home/ec2-user/www/rails/awsopc/ && /usr/local/rvm/gems/ruby-1.9.3-p392/bin/rails runner Tasks::AwsOperationTask.execute' 1> /dev/null
