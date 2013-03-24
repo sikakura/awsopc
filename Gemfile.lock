@@ -33,7 +33,6 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
-    bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.4)
     coffee-rails (3.2.2)
@@ -64,14 +63,9 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.21)
     multi_json (1.6.1)
-<<<<<<< HEAD
-    orm_adapter (0.4.0)
-=======
-    nokogiri (1.5.6)
     nokogiri (1.5.6-x86-mingw32)
     orm_adapter (0.4.0)
     parallel (0.6.3)
->>>>>>> origin/master
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -107,10 +101,6 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-<<<<<<< HEAD
-=======
-    sqlite3 (1.3.7)
->>>>>>> origin/master
     sqlite3 (1.3.7-x86-mingw32)
     thor (0.14.6)
     tilt (1.3.5)
@@ -121,10 +111,7 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-<<<<<<< HEAD
-=======
     uuidtools (2.1.3)
->>>>>>> origin/master
     warden (1.2.1)
       rack (>= 1.0)
 
@@ -132,17 +119,11 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-<<<<<<< HEAD
-  coffee-rails (~> 3.2.1)
-  devise
-  jquery-rails
-=======
   aws-sdk
   coffee-rails (~> 3.2.1)
   devise
   jquery-rails
   parallel
->>>>>>> origin/master
   rails (= 3.2.1)
   sass-rails (~> 3.2.3)
   sqlite3
