@@ -5,7 +5,11 @@ class AuthsController < ApplicationController
   # GET /auths.json
   def index
 #    @auths = Auth.all
-    @auths = current_user.auths.all
+    if current_user.role == "admin"
+      @auths = Auth.all
+    else
+      @auths = current_user.auths.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -77,9 +81,10 @@ class AuthsController < ApplicationController
   # DELETE /auths/1.json
   def destroy
     @auth = Auth.find(params[:id])
+    target_user = @auth.user_id
     @auth.destroy
     
-    @servers = Server.where( :user_id => current_user )
+    @servers = Server.where( :user_id => target_user )
     @servers.each{|server| server.destroy }
 
     respond_to do |format|

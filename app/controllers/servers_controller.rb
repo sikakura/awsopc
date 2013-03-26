@@ -5,7 +5,11 @@ class ServersController < ApplicationController
   # GET /servers.json
   def index
 #    @servers = Server.all
-    @servers = current_user.servers.all
+    if current_user.role == "admin"
+      @servers = Server.all
+    else
+      @servers = current_user.servers.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb

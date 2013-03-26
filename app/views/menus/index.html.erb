@@ -7,11 +7,15 @@
 <BR/>
 <BR/>
 <H1>
- <% if @unregistered %>
-   上のリンクの「管理情報の登録・登録」を先に行なって下さい。<BR/>
- <% else %>
-   <%= link_to "機器情報の登録・変更", servers_path %>
- <% end %>
+  <% if can? :manage, User %>
+    <%= link_to "機器情報の登録・変更", servers_path %>
+  <% else %>
+    <% if @unregistered %>
+    上のリンクの「管理情報の登録・登録」を先に行なって下さい。<BR/>
+    <% else %>
+      <%= link_to "機器情報の登録・変更", servers_path %>
+    <% end %>
+  <% end %>
 </H1>
 <BR/>
 <BR/>
