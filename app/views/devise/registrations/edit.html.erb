@@ -19,6 +19,11 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 
+  <% if can? :manage, User %>
+    <div><%= f.label :role %><br />
+    <%= f.select :role, [['一般', 'user'], ['管理者', 'admin']] %></div>
+  <% end%>
+
   <div><%= f.submit "Update" %></div>
 <% end %>
 
