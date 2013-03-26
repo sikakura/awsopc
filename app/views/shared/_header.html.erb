@@ -1,6 +1,11 @@
 <div id="header">
   <% if user_signed_in? %>
     <%= link_to "Return MENU", menus_index_path %>
+    <%= link_to "ユーザ情報の編集", edit_user_registration_path %>
+    <% if can? :manage, User %>
+      <%= link_to "ユーザ登録", new_user_registration_path %>
+    <% end %>
+
     <div align="right">
     LOGIN ID:<%= current_user.email %>
     </div>
