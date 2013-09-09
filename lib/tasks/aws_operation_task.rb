@@ -137,7 +137,12 @@ class Tasks::AwsOperationTask
   	if now_hour > 0 then
   		pre_hour = now_hour -1
   	else
-  		pre_hour = ( 24 * 7 ) - 1
+  		#pre_hour = ( 24 * 7 ) - 1
+  		if DateTime.now.wday == 0 then
+  		  pre_hour = ( 24 * 7 ) - 1 #(24*7)-1=167
+  		else
+  		  pre_hour = -1
+  		end
   	end
 
   	baseNumber = DateTime.now.wday * 24
