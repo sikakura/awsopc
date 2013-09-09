@@ -14,7 +14,7 @@ class Tasks::AwsOperationTask
     aws_config["access_key_id"] = config["access_key"]
     aws_config["secret_access_key"] = config["secret_key"]
     aws_config["ec2_endpoint"] = config["ec2_endpoint"]
-    aws_config["proxy_uri"] = "http://iproxy81.jpn-pharm.ad.local:8080"
+    #aws_config["proxy_uri"] = "http://iproxy81.jpn-pharm.ad.local:8080"
     return aws_config
   end
 
