@@ -152,6 +152,7 @@ class Tasks::AwsOperationTask
   	else
   		return "99"
   	end
+  	Rails.logger.info("Compare pre-ind[#{pre_hour+baseNumber}] with now-ind[#{now_hour+baseNumber}]")
   end
 
   def aws_operation( config={} )
