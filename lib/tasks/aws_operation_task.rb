@@ -146,13 +146,13 @@ class Tasks::AwsOperationTask
   	end
 
   	baseNumber = DateTime.now.wday * 24
+  	Rails.logger.info("Compare pre-ind[#{pre_hour+baseNumber}] with now-ind[#{now_hour+baseNumber}]")
   	#現在の時間のビットと１時間前のビットを比較して相違があれば、出力
   	if str.slice(pre_hour+baseNumber,1) != str.slice(now_hour+baseNumber,1) then
   		return str.slice(now_hour+baseNumber,1)
   	else
   		return "99"
   	end
-  	Rails.logger.info("Compare pre-ind[#{pre_hour+baseNumber}] with now-ind[#{now_hour+baseNumber}]")
   end
 
   def aws_operation( config={} )
