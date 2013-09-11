@@ -100,31 +100,44 @@ class Tasks::AwsOperationTask
       image_hash.sort{|a,b| b[1] <=> a[1]}.each{|key,value|
         Rails.logger.info("#{key}:#{value}")
         if count > generation
+          # AMI削除前に紐付いているEBSのsnapshot_idを配列（delete_target_ebs）に保持する
+          delete_target_ebs = Array.new
+          array_count = 0
+          AWS::EC2.new.images[key].block_devices.each{|key|
+    		    delete_target_ebs[array_count] = key[:ebs][:snapshot_id]
+    		    array_count = array_count + 1
+          }
+          # AMI削除
           AWS::EC2.new.images[key].deregister
           Rails.logger.info("AMI(#{key}) is deregistered.")
+          # snaphostの削除
+          delete_target_ebs.each{ |key|
+            AWS::EC2.new.snapshots[key].delete
+            Rails.logger.info("Snaphost(#{key}) is deleted.")
+          }
         end
         count = count + 1
       }
     end
     
     # delete snapshot over generations
-    snapshot_hash = {}
-    AWS::EC2.new.snapshots.with_owner(:self).each{|snap|
-      if snap.description != nil
-        if (snap.description).index(id) != nil
-          snapshot_hash[ snap.id ] = snap.start_time
-        end
-      end
-    }
-    count = 1
-    snapshot_hash.sort{|a,b| b[1] <=> a[1]}.each{|key,value|
-      Rails.logger.info("#{key}:#{value}")
-      if count > generation
-        AWS::EC2.new.snapshots[key].delete
-        Rails.logger.info("Snapshot(#{key}) is deleted.")
-      end
-      count = count + 1
-    }
+    #snapshot_hash = {}
+    #AWS::EC2.new.snapshots.with_owner(:self).each{|snap|
+    #  if snap.description != nil
+    #    if (snap.description).index(id) != nil
+    #      snapshot_hash[ snap.id ] = snap.start_time
+    #   end
+    #  end
+    #}
+    #count = 1
+    #snapshot_hash.sort{|a,b| b[1] <=> a[1]}.each{|key,value|
+    #  Rails.logger.info("#{key}:#{value}")
+    #  if count > generation
+    #    AWS::EC2.new.snapshots[key].delete
+    #    Rails.logger.info("Snapshot(#{key}) is deleted.")
+    #  end
+    #  count = count + 1
+    #}
   end
 
   def schedule_analyze( str )
