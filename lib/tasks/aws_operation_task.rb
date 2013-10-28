@@ -105,9 +105,9 @@ class Tasks::AwsOperationTask
           array_count = 0
           AWS::EC2.new.images[key].block_devices.each{|key|
             if key[:ebs] != nil
-    		      delete_target_ebs[array_count] = key[:ebs][:snapshot_id]
-    		      array_count = array_count + 1
-    		    end
+              delete_target_ebs[array_count] = key[:ebs][:snapshot_id]
+              array_count = array_count + 1
+            end
           }
           # AMI削除
           AWS::EC2.new.images[key].deregister
@@ -121,25 +121,6 @@ class Tasks::AwsOperationTask
         count = count + 1
       }
     end
-    
-    # delete snapshot over generations
-    #snapshot_hash = {}
-    #AWS::EC2.new.snapshots.with_owner(:self).each{|snap|
-    #  if snap.description != nil
-    #    if (snap.description).index(id) != nil
-    #      snapshot_hash[ snap.id ] = snap.start_time
-    #   end
-    #  end
-    #}
-    #count = 1
-    #snapshot_hash.sort{|a,b| b[1] <=> a[1]}.each{|key,value|
-    #  Rails.logger.info("#{key}:#{value}")
-    #  if count > generation
-    #    AWS::EC2.new.snapshots[key].delete
-    #    Rails.logger.info("Snapshot(#{key}) is deleted.")
-    #  end
-    #  count = count + 1
-    #}
   end
 
   def schedule_analyze( str )
