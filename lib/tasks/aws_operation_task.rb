@@ -104,8 +104,10 @@ class Tasks::AwsOperationTask
           delete_target_ebs = Array.new
           array_count = 0
           AWS::EC2.new.images[key].block_devices.each{|key|
-    		    delete_target_ebs[array_count] = key[:ebs][:snapshot_id]
-    		    array_count = array_count + 1
+            if key[:ebs] != nil
+    		      delete_target_ebs[array_count] = key[:ebs][:snapshot_id]
+    		      array_count = array_count + 1
+    		    end
           }
           # AMI削除
           AWS::EC2.new.images[key].deregister
